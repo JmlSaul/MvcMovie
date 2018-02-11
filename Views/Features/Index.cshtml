@@ -1,0 +1,47 @@
+﻿@using TypeInfo = System.Reflection.TypeInfo
+@{
+    ViewBag.Title = "Features";
+    Layout = "_Layout";
+}
+<style type="text/css">
+    .text-wrap {
+        word-wrap: break-word;
+        height: 100px
+    }
+</style>
+<h2>Features</h2>
+
+<h4>Controllers:</h4>
+<div class="table">
+    <ul>
+        @foreach (var con in (List<TypeInfo>) ViewBag.Controllers)
+        {
+            <li>@con.Name @(con.IsGenericType ? (con.GenericTypeParameters[0]?.Name ?? "") : "")</li>
+        }
+    </ul>
+</div>
+<h4>MetaDataRefrences:</h4>
+<div class="pre-scrollable text-wrap" width="100%">
+    <ul>
+        @foreach (var con in (List<Microsoft.CodeAnalysis.MetadataReference>) ViewBag.MetaDatas)
+        {
+            <li>@con.Display</li>
+        }
+    </ul>
+</div>
+<h4>TagHelpers:</h4>
+<div class="pre-scrollable text-wrap" width="100%">
+    <ul>
+        @foreach (var con in (List<TypeInfo>) ViewBag.TagHelpers)
+        {
+            <li>@con.Name</li>
+        }
+    </ul>
+</div>
+<h4>Components:</h4>
+<ul>
+    @foreach (var con in (List<TypeInfo>) ViewBag.Components)
+    {
+        <li>@con.Name</li>
+    }
+</ul>
