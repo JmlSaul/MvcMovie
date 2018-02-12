@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,8 +33,9 @@ namespace MvcMovie
                     opt => opt.FeatureProviders.Add(new GenericControllerFeatureProvider()))
                 .AddRazorOptions(opt => opt.ViewLocationExpanders.Add(new GenericViewLocationExpender()))
                 ;
-
-
+            services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
+//            var x = ((Expression<Func<object>>) (() => Expression.New(typeof(Movie)))).Compile();
+//            var ccc = ((NewExpression) x()).Constructor.Invoke(null);
             // services.Configure<RazorViewEngineOptions>(options =>
             //             {
             //                 options.AreaViewLocationFormats.Clear();
